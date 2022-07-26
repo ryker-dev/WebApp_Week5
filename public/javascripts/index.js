@@ -1,4 +1,5 @@
 //const port = process.env.PORT || '3000';
+const fetchedCategories = {};
 const ingredientList = [];
 const instructionList = [];
 const port = 1234;
@@ -13,16 +14,42 @@ const viewname = document.getElementById("recipe-name");
 const viewingredients = document.getElementById("view-ingredients");
 const viewinstructions = document.getElementById("view-instructions");
 const imageInput = document.getElementById("image-input");
-const imageForm = document.getElementById("image-form");
+const imageForm = document.getElementById("image-form"); //not in use
 const addedIngredients = document.getElementById("added-ingredients");
 const addedInstructions = document.getElementById("added-instructions");
 const searchBar = document.getElementById("search-recipe");
-
+const selectCategories = document.getElementById("select-categories");
+const submitRecipeForm = document.getElementById("submit-recipe-form");
 
 async function fetchRecipe (recipeName) {
     const response = await fetch(`http://localhost:${port}/recipe/${recipeName}`);
     return response.json();
 }
+
+async function fetchCategories () {
+    const response = await fetch(`http://localhost:${port}/category/`);
+    return response.json();
+}
+
+function onBodyLoad() {
+    // Get the recipe categories from db
+    fetchCategories().then((res) => {
+        console.log(res);
+        res.forEach(element => {
+            const name = element.name;
+            fetchedCategories[name] = element._id;
+            const line = document.createElement("p");
+            line.innerHTML = `
+            <label>
+              <input type="checkbox" />
+              <span>${name}</span>
+            </label>
+          `;
+            selectCategories.appendChild(line);
+        });
+    })
+    console.log(fetchedCategories);
+};
 
 searchBar.addEventListener('change', (event) => {
     //console.log("Test");
@@ -69,12 +96,27 @@ btnInstruction.addEventListener("click", function() {
 const btnSubmit  = document.getElementById('submit');
 btnSubmit.addEventListener('click', function() {
     console.log("Posting");
+    
+/*     const categoryCheckboxes = document.querySelectorAll('input:checked')
+    const categories = [];
+    categoryCheckboxes.forEach(element => {
+        console.log(element.querySelector('label span'));
+        categories.push(fetchedCategories[element.innerText]);
+    });
+ */
+    // Handle recipe elements
     fetch(`http://localhost:${port}/recipe/`, {
         method: "post",
         headers: {
             "Content-type": "application/json"
         },
-        body: `{ "name": "${nameText.value}", "ingredients": ${JSON.stringify(ingredientList)}, "instructions": ${JSON.stringify(instructionList)} }`
+        body:
+        `{
+            "name": "${nameText.value}",
+            "ingredients": ${JSON.stringify(ingredientList)},
+            "instructions": ${JSON.stringify(instructionList)},
+            "categories": ${JSON.stringify(categories)}
+        }`
     })
     .then(response => response.json())
     .then(data => {
@@ -83,9 +125,11 @@ btnSubmit.addEventListener('click', function() {
         console.log("Error")
     );
     
+
+    // Handle image
     const formdata = new FormData();
     for (const element of imageInput.files) {
-        formdata.append("images", element);;
+        formdata.append("images", element);
     }
     
     fetch(`http://localhost:${port}/images/`, {
@@ -98,14 +142,4 @@ btnSubmit.addEventListener('click', function() {
     }).catch(
         console.log("Error")
     );
-
-    /*
-    const form = document.getElementById("image-form");
-    const images = document.getElementById("image-input");
-    const formdata = new FormData();
-    formdata.append("images", images);
-
-    const request = new XMLHttpRequest();
-    request.open("POST", `http://localhost:${port}/images/`);
-    request.send(formdata);*/
 });
