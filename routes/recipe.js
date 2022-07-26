@@ -6,11 +6,21 @@ var router = express.Router();
 /* GET recipe json. */
 router.get('/:food', function(req, res, next) {
     const food = req.params.food;
-  res.json({
-    name: food,
-    instructions: ["Prep ingredients", "Mix ingredients", "???", "Profit"],
-    ingredients: ["Water", "Salt", "Flour"]
-  });
+    Recipe.findOne( {name: new RegExp(food, "i")}, (err, recipe) => {
+      if(err) {
+          if (err.name === "CastError") {
+              return res.status(404).send(`Recipe with name '${food}' not found`);
+          }
+          return next(err);
+      }
+      if(recipe) {
+          return res.send(recipe);
+      }
+      else {
+          return res.status(404).send(`Recipe with name '${food}' not found`);
+      }
+  })
+
 });
 
 router.post('/', function(req, res, next) {

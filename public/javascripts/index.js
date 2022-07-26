@@ -16,27 +16,34 @@ const imageInput = document.getElementById("image-input");
 const imageForm = document.getElementById("image-form");
 const addedIngredients = document.getElementById("added-ingredients");
 const addedInstructions = document.getElementById("added-instructions");
+const searchBar = document.getElementById("search-recipe");
 
 
-async function fetchRecipe () {
-    const response = await fetch(`http://localhost:${port}/recipe/pizza`);
+async function fetchRecipe (recipeName) {
+    const response = await fetch(`http://localhost:${port}/recipe/${recipeName}`);
     return response.json();
 }
 
-fetchRecipe().then((res) => {
-    console.log(res.name);
-    viewname.innerText = res.name;
-    res.ingredients.forEach(element => {
-        const line = document.createElement("li");
-        line.innerText = element;
-        viewingredients.appendChild(line);
+searchBar.addEventListener('change', (event) => {
+    //console.log("Test");
+    const recipeName = searchBar.value;
+    console.log(recipeName);
+    
+    fetchRecipe(recipeName).then((res) => {
+        console.log(res.name);
+        viewname.innerText = res.name;
+        res.ingredients.forEach(element => {
+            const line = document.createElement("li");
+            line.innerText = element;
+            viewingredients.appendChild(line);
+        });
+        res.instructions.forEach(element => {
+            const line = document.createElement("li");
+            line.innerText = element;
+            viewinstructions.appendChild(line);
+        });
+    
     });
-    res.instructions.forEach(element => {
-        const line = document.createElement("li");
-        line.innerText = element;
-        viewinstructions.appendChild(line);
-    });
-
 });
 
 btnIngredient.addEventListener("click", function() {
