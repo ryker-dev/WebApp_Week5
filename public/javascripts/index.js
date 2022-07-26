@@ -41,7 +41,7 @@ function onBodyLoad() {
             const line = document.createElement("p");
             line.innerHTML = `
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" name=${name} />
               <span>${name}</span>
             </label>
           `;
@@ -94,16 +94,24 @@ btnInstruction.addEventListener("click", function() {
 });
 
 const btnSubmit  = document.getElementById('submit');
-btnSubmit.addEventListener('click', function() {
+submitRecipeForm.addEventListener('submit', function() {
     console.log("Posting");
     
-/*     const categoryCheckboxes = document.querySelectorAll('input:checked')
+     const categoryCheckboxes = document.querySelectorAll('input:checked')
+     console.log(categoryCheckboxes);
+
     const categories = [];
-    categoryCheckboxes.forEach(element => {
-        console.log(element.querySelector('label span'));
-        categories.push(fetchedCategories[element.innerText]);
+    categoryCheckboxes.forEach(box => {
+        //console.log(box.name);
+        //console.log(fetchedCategories);
+        console.log(fetchedCategories[box.name]);
+        categories.push(fetchedCategories[box.name]);
     });
- */
+
+    console.log(categories);
+
+    //"categories": ${JSON.stringify([categories])}
+
     // Handle recipe elements
     fetch(`http://localhost:${port}/recipe/`, {
         method: "post",
@@ -121,12 +129,10 @@ btnSubmit.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-    }).catch(
-        console.log("Error")
-    );
-    
+    }).catch( error => console.log(error));
 
     // Handle image
+    /*
     const formdata = new FormData();
     for (const element of imageInput.files) {
         formdata.append("images", element);
@@ -139,7 +145,5 @@ btnSubmit.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-    }).catch(
-        console.log("Error")
-    );
+    }).catch( (error) => console.log(error));*/
 });

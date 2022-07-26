@@ -32,7 +32,8 @@ router.post('/', function(req, res, next) {
       new Recipe({
         name: req.body.name,
         ingredients: req.body.ingredients,
-        instructions: req.body.instructions
+        instructions: req.body.instructions,
+        categories: req.body.categories
       }).save((err) => {
         if(err) return next(err);
         return res.send(req.body);

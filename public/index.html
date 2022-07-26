@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Express</title>
+    <title>Recipes</title>
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -50,34 +50,34 @@
         <ol id="view-instructions"></ol>
       </div>
       <div class="col">
-        <h3>Recipe name</h3>
-        <input type="text" id="name-text" />
+        <form action="" id="submit-recipe-form" onsubmit="return false;">
+          <h3>Recipe name</h3>
+          <input type="text" id="name-text" />
 
-        <h4>Ingredients</h4>
-        <div>
-          <ul id="added-ingredients"></ul>
-        </div>
-        <textarea id="ingredients-text"></textarea>
-        <button class="btn" id="add-ingredient" type="button">
-          Add ingredient
-        </button>
+          <h4>Ingredients</h4>
+          <div>
+            <ul id="added-ingredients"></ul>
+          </div>
+          <textarea id="ingredients-text"></textarea>
+          <button class="btn" id="add-ingredient" type="button">
+            Add ingredient
+          </button>
 
-        <h4 id="add-instruction-title">Instructions</h4>
-        <div>
-          <ol id="added-instructions"></ol>
-        </div>
-        <textarea id="instructions-text"></textarea>
-        <button class="btn" id="add-instruction" type="button">
-          Add instruction
-        </button>
-        <button class="btn" id="submit" type="submit">Submit</button>
+          <h4 id="add-instruction-title">Instructions</h4>
+          <div>
+            <ol id="added-instructions"></ol>
+          </div>
+          <textarea id="instructions-text"></textarea>
+          <button class="btn" id="add-instruction" type="button">
+            Add instruction
+          </button>
+          <button class="btn" id="submit" type="submit">Submit</button>
 
-        <div>
-          <h4>Categories</h4>
-          <form action="#" id="select-categories">
-          </form>
-        </div>
-
+          <fieldset>
+            <legend>Categories</legend>
+            <div id="select-categories"></div>
+          </fieldset>
+        </form>
         <form action="" method="post" id="image-form">
           <h4>Upload image</h4>
           <input
@@ -86,7 +86,7 @@
             multiple="true"
             accept="image/png, image/jpeg"
           />
-        </form>
+          </form>
       </div>
     </div>
     <script src="javascripts/index.js"></script>

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Category = require("../models/Category");
 var router = express.Router();
 
-/* GET recipe json. */
+/* GET all categories. */
 router.get('/', function(req, res, next) {
     //const food = req.params.food;
     Category.find( {}, (err, categories) => {
