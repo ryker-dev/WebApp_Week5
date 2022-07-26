@@ -14,6 +14,9 @@ const viewingredients = document.getElementById("view-ingredients");
 const viewinstructions = document.getElementById("view-instructions");
 const imageInput = document.getElementById("image-input");
 const imageForm = document.getElementById("image-form");
+const addedIngredients = document.getElementById("added-ingredients");
+const addedInstructions = document.getElementById("added-instructions");
+
 
 async function fetchRecipe () {
     const response = await fetch(`http://localhost:${port}/recipe/pizza`);
@@ -40,12 +43,20 @@ btnIngredient.addEventListener("click", function() {
     const text = textIngredient.value;
     ingredientList.push(text);
     console.log(ingredientList);
+
+    const element = document.createElement("li");
+    element.innerText = text;
+    addedIngredients.appendChild(element);
 });
 
 btnInstruction.addEventListener("click", function() {
     const text = textInstruction.value;
     instructionList.push(text);
     console.log(instructionList);
+
+    const element = document.createElement("li");
+    element.innerText = text;
+    addedInstructions.appendChild(element);
 });
 
 const btnSubmit  = document.getElementById('submit');

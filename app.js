@@ -11,7 +11,7 @@ const imageRouter = require('./routes/images');
 
 const app = express();
 
-const mongoDB = "mongodb://localhost:27017/testdb";
+const mongoDB = process.env.MONGO_URL || "mongodb://localhost:27017/testdb";
 mongoose.connect(mongoDB);
 mongoose.Promise = Promise;
 const db = mongoose.connection;
