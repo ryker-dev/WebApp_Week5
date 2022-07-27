@@ -17,7 +17,7 @@ const cameraFileInput = document.getElementById("camera-file-input");
 const imageForm = document.getElementById("image-form"); //not in use
 const addedIngredients = document.getElementById("added-ingredients");
 const addedInstructions = document.getElementById("added-instructions");
-const searchBar = document.getElementById("search-recipe");
+const searchBar = document.getElementById("search");
 const selectCategories = document.getElementById("select-categories");
 const submitRecipeForm = document.getElementById("submit-recipe-form");
 
