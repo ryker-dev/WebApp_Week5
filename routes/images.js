@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', upload.single('recipe-images'), function(req, res, next) {
+  if(!req.file) return res.status(204).send("No image given");
   console.log(req.file);
   Image.findOne({name: req.file.originalname}, (err, image) => {
     if (err) return next(err);
