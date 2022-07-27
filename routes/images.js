@@ -1,8 +1,32 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const Image = require("../models/Image");
+const router = express.Router();
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
-router.post('/', function(req, res, next) {
-  res.send("Hi");
+router.get('/', function(req, res, next) {
+  res.send("<h1>Hello!</>");
+});
+
+
+router.post('/', upload.single('recipe-images'), function(req, res, next) {
+  console.log(req.file);
+  Image.findOne({name: req.file.originalname}, (err, image) => {
+    if (err) return next(err);
+    if(!image) {
+      new Image({
+        name: req.file.originalname,
+        buffer: req.file.buffer,
+        encoding: req.file.encoding,
+        mimetype: req.file.mimetype
+      }).save((err) => {
+        if(err) return next(err);
+        return res.send(req.body);
+      });
+    } else {
+      return res.status(403).send("Image already exists!");
+    }
+  })
 });
 
 module.exports = router;

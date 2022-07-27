@@ -13,7 +13,7 @@ const container = document.getElementById("recipe-container");
 const viewname = document.getElementById("recipe-name");
 const viewingredients = document.getElementById("view-ingredients");
 const viewinstructions = document.getElementById("view-instructions");
-const imageInput = document.getElementById("image-input");
+const cameraFileInput = document.getElementById("camera-file-input");
 const imageForm = document.getElementById("image-form"); //not in use
 const addedIngredients = document.getElementById("added-ingredients");
 const addedInstructions = document.getElementById("added-instructions");
@@ -113,6 +113,7 @@ submitRecipeForm.addEventListener('submit', function() {
     //"categories": ${JSON.stringify([categories])}
 
     // Handle recipe elements
+    /*
     fetch(`http://localhost:${port}/recipe/`, {
         method: "post",
         headers: {
@@ -130,20 +131,22 @@ submitRecipeForm.addEventListener('submit', function() {
     .then(data => {
         console.log(data);
     }).catch( error => console.log(error));
+    */
 
     // Handle image
     /*
     const formdata = new FormData();
-    for (const element of imageInput.files) {
+    for (const element of cameraFileInput.files) {
         formdata.append("images", element);
     }
     
     fetch(`http://localhost:${port}/images/`, {
         method: "post",
-        body: formdata
+        body: {}
     })
     .then(response => response.json())
     .then(data => {
         console.log(data);
-    }).catch( (error) => console.log(error));*/
+    }).catch( (error) => console.log(error));
+    */
 });
