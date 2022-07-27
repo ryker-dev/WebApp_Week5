@@ -93,10 +93,8 @@ btnInstruction.addEventListener("click", function() {
     addedInstructions.appendChild(element);
 });
 
-/*
 const btnSubmit  = document.getElementById('submit');
-submitRecipeForm.addEventListener('submit', function() {*/
-function submitRecipe() {
+submitRecipeForm.addEventListener('submit', function() {
     console.log("Posting");
     
      const categoryCheckboxes = document.querySelectorAll('input:checked')
@@ -149,4 +147,4 @@ function submitRecipe() {
         console.log(data);
     }).catch( (error) => console.log(error));
     */
-};
+});
