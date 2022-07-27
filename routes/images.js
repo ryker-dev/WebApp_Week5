@@ -22,7 +22,7 @@ router.post('/', upload.single('recipe-images'), function(req, res, next) {
         mimetype: req.file.mimetype
       }).save((err) => {
         if(err) return next(err, image);
-        return res.send(image.id);
+        return res.send(image);
       });
     } else {
       return res.status(403).send("Image already exists!");

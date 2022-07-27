@@ -51,7 +51,7 @@
         <ol id="view-instructions"></ol>
       </div>
       <div class="col">
-        <form action="/images" method="post" id="submit-recipe-form" enctype="multipart/form-data">
+        <form action="/images" onsubmit="submitRecipe()" method="post" id="submit-recipe-form" enctype="multipart/form-data">
           <h3>Recipe name</h3>
           <input type="text" id="name-text" />
 
