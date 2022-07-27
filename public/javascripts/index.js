@@ -113,7 +113,6 @@ submitRecipeForm.addEventListener('submit', function() {
     //"categories": ${JSON.stringify([categories])}
 
     // Handle recipe elements
-    /*
     fetch(`http://localhost:${port}/recipe/`, {
         method: "post",
         headers: {
@@ -131,7 +130,6 @@ submitRecipeForm.addEventListener('submit', function() {
     .then(data => {
         console.log(data);
     }).catch( error => console.log(error));
-    */
 
     // Handle image
     /*

@@ -20,8 +20,8 @@ router.post('/', upload.single('recipe-images'), function(req, res, next) {
         encoding: req.file.encoding,
         mimetype: req.file.mimetype
       }).save((err) => {
-        if(err) return next(err);
-        return res.send(req.body);
+        if(err) return next(err, image);
+        return res.send(image.id);
       });
     } else {
       return res.status(403).send("Image already exists!");
