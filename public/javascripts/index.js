@@ -108,7 +108,7 @@ submitRecipeForm.addEventListener('submit', function() {
         categories.push(fetchedCategories[box.name]);
     });
 
-    console.log(categories);
+    console.log(categories); 
 
     //"categories": ${JSON.stringify([categories])}
 
